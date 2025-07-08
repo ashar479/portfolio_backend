@@ -1,0 +1,11 @@
+services:
+  - type: web
+    name: ansh-chatbot-backend
+    env: python
+    plan: free
+    region: oregon
+    buildCommand: ""
+    startCommand: uvicorn main:app --host 0.0.0.0 --port 10000
+    envVars:
+      - key: GROQ_API_KEY
+        sync: false
