@@ -1,11 +1,13 @@
-import openai
-import os
+from openai import OpenAI
 from dotenv import load_dotenv
+import os
 
-load_dotenv()  # Load environment variables from .env
+load_dotenv()
 
-openai.api_key = os.getenv("OPENROUTER_API_KEY")
-openai.base_url = "https://openrouter.ai/api/v1"
+client = OpenAI(
+    api_key=os.getenv("OPENROUTER_API_KEY"),
+    base_url="https://openrouter.ai/api/v1"
+)
 
-models = openai.Model.list()
-print([m.id for m in models["data"]])
+models = client.models.list()
+print([model.id for model in models.data])
