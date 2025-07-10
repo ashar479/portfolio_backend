@@ -152,47 +152,62 @@ async def ask_question(msg: Message):
                         "  - Designed and delivered a structured curriculum focused on practical skills, real-world problem solving, and long-term learning empowerment\n"
                         "  - Mentored students through hands-on training, helping them build foundational tech knowledge for future academic and career growth\n\n"
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
                         "🧠 **Skills:**\n"
-                        "- **Languages:** JavaScript, Java, Python, SQL\n"
-                        "- **Frameworks:** React, React Native, Node.js, FastAPI, Express\n"
-                        "- **Tools:** Docker, Jenkins, Git, Postgres, MySQL, AWS, Salesforce CRM\n"
-                        "- **Practices:** Agile, TDD, CI/CD, UX Design, REST APIs\n\n"
+                        "- **Languages:** JavaScript, TypeScript, Java, Python, SQL, JSON\n"
+                        "- **Frameworks/Libraries:** React.js, React Native, Next.js, Node.js, FastAPI, Express, Redux Toolkit, Zustand, Mocha, Jest, JUnit, Selenium, Cypress, React Testing Library (RTL)\n"
+                        "- **Frontend & Design:** HTML, CSS, Tailwind CSS, UI/UX Design, Figma, Design Systems, Lighthouse, Chrome DevTools, Core Web Vitals\n"
+                        "- **Backend & APIs:** RESTful APIs, GraphQL, Swagger, API Integration, WebSockets, SSE, Performance Optimization, Scalability, Caching, OAuth2, JWT, OWASP Security\n"
+                        "- **Cloud & Infrastructure:** AWS (EC2, S3, DynamoDB, Lambda), Cloudflare Workers, Vercel Edge Functions, Terraform, Pulumi, Docker, Kubernetes, Cloud Infrastructure, Serverless Architecture, CI/CD Pipelines, Jenkins, GitHub Actions\n"
+                        "- **Databases & Storage:** PostgreSQL, MySQL, NoSQL, Vector DBs (Pinecone, FAISS), Redis\n"
+                        "- **AI & LLM Tools:** OpenAI API, LangChain, Retrieval-Augmented Generation (RAG), Prompt Engineering, LLMOps, Semantic Search, Embeddings\n"
+                        "- **Analytics & Monitoring:** Mixpanel, Segment, Amplitude, Datadog, Sentry, New Relic\n"
+                        "- **Testing & Coverage:** TDD, Automation Workflows, JaCoCo, Code Coverage Tools, End-to-End Testing\n"
+                        "- **Dev Tools & Utilities:** Git, GitHub, Vercel, Swagger, n8n, UML\n"
+                        "- **Practices & Methodologies:** Agile, Scrum, User-Centric Thinking, Cross-Functional Collaboration, SOC2/GDPR Awareness, Product Thinking\n"
+                        "- **Soft Skills:** Communication, Collaboration, Ownership Mentality, Problem Solving, Adaptability, Initiative, Attention to Detail, Team-Oriented, Consistency, Clear Documentation, Fast Learning, Remote Communication, Async Collaboration, Creative Thinking, Time Management, AI Collaboration\n\n"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
                         "🧍 **Personal Interests:**\n"
-                        "Ansh enjoys working on AI agents, web automation, contributing to open-source, and mentoring peers. "
-                        "He’s particularly excited by the intersection of AI, design, and backend engineering.\n\n"
+                        "- Exploring AI agents, automation workflows, and prompt engineering techniques\n"
+                        "- Mentoring peers and simplifying complex software topics for beginners\n"
+                        "- Designing UI/UX experiences and building creative side projects in React or Unity\n"
+                        "- Volunteering with education-focused NGOs like Eklavya to teach underprivileged students\n"
+                        "- Reading about cognitive science, productivity systems, and behavioral design\n"
+                        "- Experimenting with personal automation tools and open-source contributions\n\n"
+
+
 
                         "❤️ **Personal Questions:**\n"
 
@@ -220,7 +235,7 @@ async def ask_question(msg: Message):
 
 
 
-                        "📍 **Personal Details:**\n"
+                        "📍 **Address Details:**\n"
                         "- Lives in Tempe, AZ\n"
                         "- 24-year-old Male (He/Him), Heterosexual\n"
                         "- Currently on F1 OPT (expires: June 8, 2026)\n"
