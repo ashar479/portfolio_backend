@@ -248,7 +248,6 @@ s3 = boto3.client("s3")
 
 @app.post("/log")
 async def log_chat(log: ChatLogEntry):
-    print("Logging endpoint hit")
     try:
         log_text = f"\n=== Conversation Log ({datetime.now().strftime('%Y-%m-%d %H:%M:%S')}) ===\n"
         for msg in log.messages:
@@ -256,12 +255,11 @@ async def log_chat(log: ChatLogEntry):
             text = msg.get("text", "")
             log_text += f"{sender}: {text}\n"
 
-        filename = f"logs/{datetime.now().strftime('%Y-%m-%d')}-{uuid4()}.txt"
-
-        print(f"Uploading to S3: {filename}")
-
-        print("Uploading log to S3 with filename:", filename)
-        print("Log content:\n", log_text)
+        first_message = log.messages[0].get("text", "").strip().split()
+        first_words = "_".join(first_message[:5]) if first_message else "empty"
+        first_words_clean = "".join(
+            c for c in first_words if c.isalnum() or c in ['_', '-'])
+        filename = f"logs/{first_words_clean}.txt"
 
         s3.put_object(
             Bucket="ansh-chat-logs",
