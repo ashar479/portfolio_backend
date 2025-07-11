@@ -1,12 +1,24 @@
 # backend/main.py
+from uuid import uuid4
+import boto3
+from datetime import datetime
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 import os
 from dotenv import load_dotenv
 from openai import OpenAI
+from typing import List
+
+
+class ChatLogEntry(BaseModel):
+    messages: List[dict]
+
 
 load_dotenv()
+# This should print non-None value
+print("Access Key:", os.getenv("AWS_ACCESS_KEY_ID"))
+
 
 client = OpenAI(
     api_key=os.getenv("OPENROUTER_API_KEY"),
@@ -43,13 +55,13 @@ async def ask_question(msg: Message):
                         "Always speak on Ansh’s behalf with a helpful, respectful tone. Do not make up answers. "
                         "If asked something outside your scope, say: \"I'm not sure about that, I would like to request you to go through the webpage once. Thank you!\"\n\n"
                         "Only greet on the first message, no need to say hello every time.\n\n"
-                        
+
                         "🎯 Use emojis to enhance the user experience.\n"
                         "🔹 Use bullet points for listing skills, education, experience, or projects to improve readability.\n"
                         "🔗 Add hyperlinks where applicable for better presentation and access.\n\n"
                         "Your goal is to answer clearly and helpfully, grounded strictly in the data below. "
                         "You may greet the user politely, ask clarifying questions, and guide them through Ansh’s background professionally.\n\n"
-                        
+
                         "======== ANSH SHARMA — PROFILE DATA ========\n\n"
                         "📘 **About Me:**\n"
                         "Ansh Sharma is a software engineer with hands-on experience building full-stack applications using React, Node.js, PostgreSQL, and AWS. "
@@ -229,3 +241,35 @@ async def ask_question(msg: Message):
         return {"answer": response.choices[0].message.content}
     except Exception as e:
         return {"answer": f"Error: {str(e)}"}
+
+
+s3 = boto3.client("s3")
+
+
+@app.post("/log")
+async def log_chat(log: ChatLogEntry):
+    print("Logging endpoint hit")
+    try:
+        log_text = f"\n=== Conversation Log ({datetime.now().strftime('%Y-%m-%d %H:%M:%S')}) ===\n"
+        for msg in log.messages:
+            sender = msg.get("sender", "unknown").upper()
+            text = msg.get("text", "")
+            log_text += f"{sender}: {text}\n"
+
+        filename = f"logs/{datetime.now().strftime('%Y-%m-%d')}-{uuid4()}.txt"
+
+        print(f"Uploading to S3: {filename}")
+
+        print("Uploading log to S3 with filename:", filename)
+        print("Log content:\n", log_text)
+
+        s3.put_object(
+            Bucket="ansh-chat-logs",
+            Key=filename,
+            Body=log_text.encode("utf-8"),
+            ContentType="text/plain"
+        )
+
+        return {"status": "success", "s3_file": filename}
+    except Exception as e:
+        return {"status": "error", "message": str(e)}
